@@ -43,8 +43,8 @@ async function generateSmartQuestions(text, count) {
     });
 
     if (!response.ok) {
-      const error = await response.json();
-      console.error("Error al generar preguntas:", error);
+      const errorText = await response.text(); // ← cambia aquí
+      console.error("Error al generar preguntas:", errorText);
       return [];
     }
 
