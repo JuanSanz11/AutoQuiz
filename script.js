@@ -1,4 +1,4 @@
-script.js
+
 let questions = [];
 
 document.getElementById("generateBtn").addEventListener("click", async () => {
