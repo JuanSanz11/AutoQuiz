@@ -35,19 +35,23 @@ async function extractTextFromFile(file) {
 
 // Simulación de IA: Genera preguntas con opciones y respuesta correcta
 async function generateSmartQuestions(text, count) {
-  const response = await fetch("/api/generateQuiz", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text, count })
+  const sentences = text.match(/[^\.!\?]+[\.!\?]+/g) || [];
+  const selected = sentences.sort(() => 0.5 - Math.random()).slice(0, count);
+
+  return selected.map((sentence, i) => {
+    const correct = `Interpretación correcta de: "${sentence.trim().slice(0, 60)}..."`;
+    const options = shuffle([
+      correct,
+      "Interpretación incorrecta 1",
+      "Interpretación incorrecta 2",
+      "Interpretación incorrecta 3"
+    ]);
+    return {
+      question: `¿Cuál es la mejor interpretación de esta frase?: "${sentence.trim()}"`,
+      options,
+      correctIndex: options.indexOf(correct)
+    };
   });
-
-  if (!response.ok) {
-    console.error("Error al generar preguntas:", await response.text());
-    return [];
-  }
-
-  const data = await response.json();
-  return data;
 }
 
 function shuffle(array) {
