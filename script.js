@@ -1,3 +1,4 @@
+script.js
 let questions = [];
 
 document.getElementById("generateBtn").addEventListener("click", async () => {
@@ -35,25 +36,23 @@ async function extractTextFromFile(file) {
 
 // Simulación de IA: Genera preguntas con opciones y respuesta correcta
 async function generateSmartQuestions(text, count) {
-  try {
-    const response = await fetch("/api/generateQuiz", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, count })
-    });
+  const sentences = text.match(/[^\.!\?]+[\.!\?]+/g) || [];
+  const selected = sentences.sort(() => 0.5 - Math.random()).slice(0, count);
 
-    if (!response.ok) {
-      const errorText = await response.text(); // ← cambia aquí
-      console.error("Error al generar preguntas:", errorText);
-      return [];
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (err) {
-    console.error("Error de conexión con el backend:", err);
-    return [];
-  }
+  return selected.map((sentence, i) => {
+    const correct = `Interpretación correcta de: "${sentence.trim().slice(0, 60)}..."`;
+    const options = shuffle([
+      correct,
+      "Interpretación incorrecta 1",
+      "Interpretación incorrecta 2",
+      "Interpretación incorrecta 3"
+    ]);
+    return {
+      question: `¿Cuál es la mejor interpretación de esta frase?: "${sentence.trim()}"`,
+      options,
+      correctIndex: options.indexOf(correct)
+    };
+  });
 }
 
 function shuffle(array) {
@@ -109,3 +108,4 @@ function checkAnswer(index) {
     feedback.innerHTML = "<span style='color: red;'>Incorrecto. La respuesta correcta está marcada en verde.</span>";
   }
 }
+
