@@ -21,8 +21,6 @@ Genera ${count} preguntas tipo quiz con 4 opciones cada una basadas en el siguie
   ...
 ]
 
-No expliques nada. Devuelve solo el JSON, sin comentarios ni texto adicional.
-
 Texto:
 ${text}
 `;
@@ -42,34 +40,11 @@ ${text}
     });
 
     const data = await response.json();
+    const content = data.choices[0].message.content;
 
-    if (!data.choices || !data.choices[0]?.message?.content) {
-      console.error("Respuesta inesperada de OpenAI:", data);
-      return res.status(500).json({ error: "Respuesta inesperada de OpenAI" });
-    }
-
-    const content = data.choices[0].message.content.trim();
-
-    // Extrae el primer bloque JSON válido del contenido
-    const match = content.match(/
-
-\[\s*{[\s\S]*?}\s*\]
-
-/);
-
-    if (!match) {
-      console.error("No se encontró un JSON válido en la respuesta:", content);
-      return res.status(500).json({ error: "La respuesta de OpenAI no contiene un JSON válido", raw: content });
-    }
-
-    try {
-      const quiz = JSON.parse(match[0]);
-      res.status(200).json(quiz);
-    } catch (parseError) {
-      console.error("Error al parsear el JSON extraído:", match[0]);
-      res.status(500).json({ error: "No se pudo parsear el JSON extraído", raw: match[0] });
-    }
-
+    // Intentamos convertir la respuesta en JSON
+    const quiz = JSON.parse(content);
+    res.status(200).json(quiz);
   } catch (error) {
     console.error("Error al generar el quiz:", error);
     res.status(500).json({ error: "Error al generar el quiz con OpenAI" });
