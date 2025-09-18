@@ -1,21 +1,79 @@
+/* Fondo general y tipografía */
 body {
   font-family: Arial, sans-serif;
   padding: 2rem;
-  background: #f4f4f4;
+  background: #eef2f7; /* azul claro suave, ideal para concentración */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
 }
 
+/* Título */
 h1 {
-  color: #333;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
+/* Contenedor del quiz */
 #quizContainer {
   margin-top: 2rem;
+  width: 100%;
+  max-width: 600px;
 }
 
+/* Preguntas */
 .question {
   margin-bottom: 1.5rem;
-  background: #fff;
+  background: #ffffff;
   padding: 1rem;
   border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Input de archivo */
+#fileInput {
+  display: block;
+  margin: 1rem auto;
+  font-size: 16px;
+}
+
+/* Botón generar quiz */
+#generateBtn {
+  display: block;
+  margin: 0.5rem auto 2rem auto;
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.6);
+  transition: box-shadow 0.3s ease;
+}
+
+#generateBtn:hover {
+  box-shadow: 0 0 15px rgba(52, 152, 219, 0.9);
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+
+  #quizContainer {
+    width: 90%;
+  }
+
+  #generateBtn {
+    width: 80%;
+  }
+
+  #fileInput {
+    width: 80%;
+  }
 }
