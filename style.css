@@ -59,23 +59,56 @@ h1 {
   cursor: pointer;
 }
 
-#btn {
-  display: block;
-  margin: 0.5rem auto 0.5rem auto;
-  padding: 12px 24px;
-  font-size: 16px;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  border-radius: 30px;
-  box-shadow: 0 0 10px rgba(52, 152, 219, 0.6);
-  transition: box-shadow 0.3s ease;
+
+/* Contenedor del input y nombre del archivo */
+.file-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem auto;
+  width: 100%;
+  max-width: 600px;
 }
 
-#btn:hover {
-  box-shadow: 0 0 15px rgba(52, 152, 219, 0.9);
+/* Botón personalizado para cargar archivo */
+.custom-file-label {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #1e3a8a; /* azul oscuro */
+  color: white;
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(30, 58, 138, 0.6);
+  transition: box-shadow 0.3s ease;
   cursor: pointer;
+  margin-bottom: 0.5rem;
+  text-align: center;
 }
+
+.custom-file-label:hover {
+  box-shadow: 0 0 15px rgba(30, 58, 138, 0.9);
+}
+
+/* Ocultar el input real */
+#fileInput {
+  display: none;
+}
+
+/* Cuadro para mostrar nombre del archivo */
+#fileNameDisplay {
+  padding: 10px 15px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-size: 14px;
+  color: #2c3e50;
+  max-width: 90%;
+  word-break: break-word;
+  text-align: center;
+}
+
+
+
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -91,11 +124,16 @@ h1 {
     width: 80%;
   }
 
-  #btn {
-    width: 80%;
-  }
-
   #fileInput {
     width: 80%;
   }
+
+  /* Responsive */
+@media (max-width: 768px) {
+  .custom-file-label,
+  #fileNameDisplay,
+  #generateBtn {
+    width: 80%;
+  }
+}
 }
