@@ -59,6 +59,24 @@ h1 {
   cursor: pointer;
 }
 
+#btn {
+  display: block;
+  margin: 0.5rem auto 0.5rem auto;
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.6);
+  transition: box-shadow 0.3s ease;
+}
+
+#btn:hover {
+  box-shadow: 0 0 15px rgba(52, 152, 219, 0.9);
+  cursor: pointer;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   body {
@@ -70,6 +88,10 @@ h1 {
   }
 
   #generateBtn {
+    width: 80%;
+  }
+
+  #btn {
     width: 80%;
   }
 
