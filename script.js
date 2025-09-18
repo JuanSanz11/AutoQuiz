@@ -10,6 +10,11 @@ document.getElementById("generateBtn").addEventListener("click", async () => {
   renderQuiz(questions);
 });
 
+document.getElementById('fileInput').addEventListener('change', function () {
+  const fileName = this.files[0]?.name || 'Ningún archivo seleccionado';
+  document.getElementById('fileNameDisplay').textContent = fileName;
+});
+
 async function extractTextFromFile(file) {
   const ext = file.name.split(".").pop().toLowerCase();
   const arrayBuffer = await file.arrayBuffer();
@@ -108,4 +113,6 @@ function checkAnswer(index) {
     feedback.innerHTML = "<span style='color: red;'>Incorrecto. La respuesta correcta está marcada en verde.</span>";
   }
 }
+
+
 
